@@ -12,6 +12,9 @@ export default class ChatScreen extends React.Component {
    state={
        textMessage:''
    }
+   handleChange=key=>val=>{
+       this.setState({[key]:val})
+   }
     render() {
         return (
             <SafeAreaView>
