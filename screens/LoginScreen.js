@@ -1,8 +1,10 @@
 import React from 'react';
-import {Text, View, TextInput, Button, AsyncStorage,TouchableOpacity } from 'react-native';
+import {Text, View, TextInput, Button,SafeAreaView, AsyncStorage } from 'react-native';
 import User from '../User';
 import styles from '../constants/styles';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import firebase from 'firebase';
+//import { SafeAreaView } from 'react-navigation';
 export default class LoginScreen extends React.Component {
     static navigationOptions={
         header:'LogIn'
@@ -27,19 +29,21 @@ export default class LoginScreen extends React.Component {
    }
   render() {
     return (
+      
       <View style={StyleSheet.container}>
         <TextInput placeholder="Phone Number" keyboardType="number-pad" style={styles.input} 
         value={this.state.phone}
         onChangeText={this.handleChange('phone')}
-        />
+        ></TextInput>
         <TextInput placeholder="Name" style={styles.input} 
          onChangeText={this.handleChange('name')}
-        value={this.state.name}/>
+        value={this.state.name}></TextInput>
 
         <TouchableOpacity onPress={this.submitForm}>
           <Text>Enter</Text>
         </TouchableOpacity>
       </View>
+     
     );
   }
 }

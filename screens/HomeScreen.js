@@ -16,12 +16,16 @@ export default class HomeScreen extends React.Component{
         dbRef.on('child_added',(val)=>{
             let person=val.val();
             person.phone=val.key;
+            if(person.phone==User.phone){
+                User.name=person.name;
+            }else{
             console.log('person',person);
             this.setState((prevState)=>{
                 return{
                     users:[...prevState.users,person]
                 }
             })
+        }
         })
     }
 
@@ -31,11 +35,14 @@ export default class HomeScreen extends React.Component{
     }
     renderRow=({item})=>{
         return(
+            
             <TouchableOpacity 
             onPress={()=>this.props.navigation.navigate('Chat',item)}
             style={{padding:10,borderBottomColor:'#ccc',borderBottomWidth:1}}>
                 <Text style={{fontSize:20}}>{item.name}</Text>
+              
             </TouchableOpacity>
+           
         )
     }
     render(){
@@ -46,6 +53,8 @@ export default class HomeScreen extends React.Component{
                 renderItem={this.renderRow}
                 keyExtractor={(item)=>item.phone}
                 />
+                 <Button onPress={this._logOut}
+               >LogOut</Button>
             </SafeAreaView>
         )
     }

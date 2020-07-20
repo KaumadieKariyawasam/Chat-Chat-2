@@ -10,16 +10,14 @@ import ChatScreen from './screens/ChatScreen';
 const AppStack=createStackNavigator({Home:HomeScreen, Chat:ChatScreen});
 const AuthStack=createStackNavigator({Login:LoginScreen});
 
-
-const switchNav=createSwitchNavigator(
- {
-    AuthLoading:AuthLoadingScreen,
-    App:AppStack,
-    Auth:AuthStack,
-    
-  },
+export default createAppContainer(createStackNavigator(
   {
-    initialRouteName:'AuthLoading'
-  }
-);
-export default createAppContainer(switchNav);
+     AuthLoading:AuthLoadingScreen,
+     App:AppStack,
+     Auth:AuthStack,
+     
+   },
+   {
+     initialRouteName:'AuthLoading'
+   }
+ ));
