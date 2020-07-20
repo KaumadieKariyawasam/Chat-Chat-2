@@ -1,21 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {createSwitchNavigator,createAppContainer} from 'react-navigation';
+import { StyleSheet, Text, View, TextInput, Button, AsyncStorage,TouchableOpacity } from 'react-native';
+import { createStackNavigator } from 'react-navigation-stack'
+import HomeScreen from './screens/HomeScreen';
+import LoginScreen from './screens/LoginScreen';
+import AuthLoadingScreen from './screens/AuthLoadingScreen';
+import ChatScreen from './screens/ChatScreen';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const AppStack=createStackNavigator({Home:HomeScreen, Chat:ChatScreen});
+const AuthStack=createStackNavigator({Login:LoginScreen});
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+
+const switchNav=createSwitchNavigator(
+ {
+    AuthLoading:AuthLoadingScreen,
+    App:AppStack,
+    Auth:AuthStack,
+    
   },
-});
+  {
+    initialRouteName:'AuthLoading'
+  }
+);
+export default createAppContainer(switchNav);
